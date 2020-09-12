@@ -1,0 +1,588 @@
+   // CIM_System
+    instance of CIM_System as $ServerSystem { InstanceID = "ServerSystem";
+    CreationClassName = "CIM_System"; Name = "10.336.643.144";
+   NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
+   Roles = {}; EnabledState = 5; OtherEnabledState = null;
+   RequestedState = 12; EnabledDefault = 2; HealthState = 5;
+   OperationalStatus = {2}; StatusDescriptions = {}; 
+   Caption = "Computer System"; Description = "WBEM-enabled computer system";
+   ElementName = "Computer System"; };
+
+    // CIM_Registered Profile instances
+       
+    instance of CIM_RegisteredProfile as $RPIND {
+       InstanceID = "Indications+1.2.2"; RegisteredOrganization = 2;
+       OtherRegisteredOrganization = null; 
+       RegisteredName = "Indications"; RegisteredVersion = "1.2.2";
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "DMTF Indications"; };
+    // CIM_RegisteredProfile instances (WBEM Server, IP Interface, etc
+    // InstanceID
+    // RegisteredName,RegisteredOrganization,RegisteredVersion
+    // AdvertiseTypes,ImplementedFeatures
+    instance of CIM_RegisteredProfile as $RPWBEMServer {
+      InstanceID = "WBEM Server 1.0.1i";
+      RegisteredName = "WBEM Server";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.0.1i";
+      AdvertiseTypes = {3};
+      AdvertiseTypeDescriptions = {"SLP"};
+      ImplementedFeatures = {""}; }; 
+    instance of CIM_RegisteredProfile as $RPDMTFPRP {
+       InstanceID = "DMTF Profile Registration+1.0"; RegisteredOrganization = 2;
+       OtherRegisteredOrganization = null; 
+       RegisteredName = "DMTF Profile Registration"; RegisteredVersion = "1.0";
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"}; };
+    instance of CIM_RegisteredProfile as $RPIPInterface {
+      InstanceID = "IP Interface 1.1.1";
+      RegisteredName = "IP Interface";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.1.1";
+      AdvertiseTypes = {};
+      AdvertiseTypeDescriptions = {}; }; 
+    instance of CIM_RegisteredProfile as $RPJobControl {
+      InstanceID = "Job Control 1.0.0";
+      RegisteredName = "Job Control";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.0.0";
+      AdvertiseTypes = {};
+      AdvertiseTypeDescriptions = {}; }; 
+    instance of CIM_RegisteredProfile as $RPRoleBased {
+      InstanceID = "Role Based Authorization 1.0.0";
+      RegisteredName = "Role Based Authorization";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.0.0";
+      AdvertiseTypes = {};
+      AdvertiseTypeDescriptions = {}; }; 
+    instance of CIM_RegisteredProfile as $RPSimpleIdent {
+      InstanceID = "Simple Identity Management 1.1.0";
+      RegisteredName = "Simple Identity Management";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.1.0";
+      AdvertiseTypes = {};
+      AdvertiseTypeDescriptions = {}; }; 
+        
+      
+    
+    // CIM_ElementSoftwareIdentity instances
+
+          
+    // INDICATIONS CLASSES
+    // A CIM_IndicationService instance
+    instance of CIM_IndicationService as $INDSERV {
+       Name = "Indication Service";
+      CreationClassName = "CIM_IndicationService";
+      SystemName = "10.336.643.144";
+      SystemCreationClassName = "CIM_System";
+      FilterCreationEnabled = true;
+      DeliveryRetryAttempts = 3;
+      DeliveryRetryInterval = 30;
+      SubscriptionRemovalAction = 4;
+      SubscriptionRemovalTimeInterval = 0; };
+      
+    // Instances of  CIM_FilterCollection 
+    instance of CIM_FilterCollection as $INDStatFiltColl {
+       InstanceID = "10.336.643.144:StaticFilterCollection";
+       CollectionName = "StaticFilterCollection"; };
+    instance of CIM_FilterCollection as $INDJCFiltColl {
+       InstanceID = "10.336.643.144:JobControlFilterCollection";
+       CollectionName = "DMTF:Job Control:FilterCollection"; };
+  
+    // Instances of CIM_IndicationFilter
+    instance of CIM_IndicationFilter as $INDFiltJobControl01 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Creation of a job";
+       Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ConcreteJob";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl02 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Change in job State";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::JobState <> PreviousInstance.CIM_ConcreteJob::JobState";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl03 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Job Completed with an Exception/Error";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 6";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl04 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Job Completed Successfully";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 2";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl05 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Change in PercentComplete";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::PercentComplete <> PreviousInstance.CIM_ConcreteJob::PercentComplete";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+       
+    // A CIM_ConcreteDependency Instance
+     instance of CIM_ConcreteDependency as $CDRPSFC {
+        Antecedent = $RPIND;
+        Dependent = $INDStatFiltColl; };
+     instance of CIM_ConcreteDependency as $CDRPJC {
+        Antecedent = $RPJobControl;
+        Dependent = $INDJCFiltColl; };
+
+        
+    // A CIM_ElementConformsToProfile Instance
+    instance of CIM_ElementConformsToProfile as $ECTPWBEMServer {
+        ManagedElement = $ServerSystem;
+        ConformantStandard = $RPWBEMServer; };
+     instance of CIM_ElementConformsToProfile as $ECTPRPINDIS {
+        ManagedElement = $INDSERV;
+        ConformantStandard = $RPIND; };
+
+    // A CIM_HostedService Instance
+     instance of CIM_HostedService as $HSSIS {
+        Antecedent = $ServerSystem;
+        Dependent = $INDSERV; };
+
+    // Instances of CIM_OwningCollectionElement
+     instance of CIM_OwningCollectionElement as $OCEISFCStatic {
+        OwningElement  = $INDSERV;
+        OwnedElement = $INDStatFiltColl; };
+     instance of CIM_OwningCollectionElement as $OCEISFCJC {
+        OwningElement  = $INDSERV;
+        OwnedElement = $INDJCFiltColl; };
+
+    // Instances of CIM_ServiceAffectsElement
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC01 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl01; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC02 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl02; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC03 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl03; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC04 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl04; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC05 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl05; }; 
+
+
+    // Instances of CIM_MemberOfCollection
+    instance of CIM_MemberOfCollection as $MOCStatJobControlColl {
+      Collection = $INDStatFiltColl;
+      Member = $INDJCFiltColl; };
+     instance of CIM_MemberOfCollection as $MOCAFCAIF01 {
+        Collection = $INDJCFiltColl;
+        Member = $INDFiltJobControl01; }; 
+     instance of CIM_MemberOfCollection as $MOCAFCAIF02 {
+        Collection = $INDJCFiltColl;
+        Member = $INDFiltJobControl02; }; 
+     instance of CIM_MemberOfCollection as $MOCAFCAIF03 {
+        Collection = $INDJCFiltColl;
+        Member = $INDFiltJobControl03; }; 
+     instance of CIM_MemberOfCollection as $MOCAFCAIF04 {
+        Collection = $INDJCFiltColl;
+        Member = $INDFiltJobControl04; }; 
+     instance of CIM_MemberOfCollection as $MOCAFCAIF05 {
+        Collection = $INDJCFiltColl;
+        Member = $INDFiltJobControl05; }; 
+
+
+// WBEM Server Classes
+
+    // SHRUB: CIM_ElementConformsToProfile TO CIM_ComputerSystem
+    // PRP SHRUBs: CIM_ReferencedProfile to related profiles
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerIPInterface {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPIPInterface; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPIPInterface;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerJob {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPJobControl; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPJobControl;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerRoleBased {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPRoleBased; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerSimple {
+       Antecedent = $RPRoleBased;
+       Dependent = $RPSimpleIdent; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPRoleBased;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerSimple {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPSimpleIdent; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPSimpleIdent;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerIND {
+       Antecedent = $RPWBEMServer;
+       Dependent = $RPIND; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPIND;
+       Dependent = $RPDMTFPRP; };
+    // PRP SHRUBs: CIM_RegisteredProfile to SoftwareIdentity
+
+    
+    // CIM_CIMXMLCapabilities instances
+    // InstanceID
+    // AuthenticationMechanismsSupported,ElementName,GenericOperationCapabilities
+    // MaxConnections,MultipleOperationsSupported,RequestedStatesSupported
+    // Validated,WBEMProtocolVersionsSupported
+       instance of CIM_CIMXMLCapabilities as $CIMXMLCap {
+         InstanceID = "CIMXMLCapabilities Instance";
+         AuthenticationMechanismsSupported = {0};
+         ElementName = "WBEM Server CIMXMLCapabilities";
+         ListeningPortManagementSupported = true;
+         GenericOperationCapabilities = "instance of CIM_GenericOperationCapabilitiesStructure {FQLSupported = false; "
+         "CQLSupport = {0}; OperationsSupported = {2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,"
+         "26,27,28,29,30,31,32,33,34,35,36,37,38,39,40}; };";
+         MaxConnections = 1;
+         MultipleOperationsSupported = false;
+         RequestedStatesSupported = {2,3,11};
+         Validated = false;
+         WBEMProtocolVersionsSupported = {"2.0.0"}; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_ProtocolService (see CIM_ProtocolService)
+    
+    // CIM_ComputerSystem instances
+    // CreationClassName,Name,NameFormat
+    // ElementName,EnabledState,HealthState,RequestedState
+    // OperationalStatus, 
+    // SHRUB: CIM_ElementConformsToProfile TO CIM_RegisteredProfile (WBEM Server) (see above)
+    // CIM_HostedAccessPoint to CIM_TCPProtocolEndpoint and 
+    // CIM_HostedService to CIM_WBEMServer, CIM_ProtocolService, CIM_RoleBasedAuthorizationService and CIM_AccountManagementService
+    // CIM_OwningCollectionElement to CIM_Role
+    // CIM_AccountOnSystem to CIM_Account
+    
+    // CIM_GenericOperationCapabilitiesStructure instances
+    // CQLSupport,FQLSupported,OperationsSupported,
+    
+    // CIM_ProtocolService instances
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // ElementName,EnabledState,MaxConnections,Protocol,RequestedState
+    // OperationalStatus,HealthState
+    instance of CIM_ProtocolService as $PROTOSERVICE {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_ProtocolService";
+       SystemName = "10.336.643.144";
+       Name = "CIMXML Protocol Service";
+       ElementName = "WBEM Protocol Service";
+       EnabledState = 5;
+       MaxConnections = 1;
+       RequestedState = 12;
+       OperationalStatus = {2};
+       HealthState = 5; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_WBEMProtocolServiceCapabilities
+     instance of CIM_ElementCapabilities as $ECCSP0 {
+        Capabilities = $CIMXMLCap;
+        ManagedElement = $PROTOSERVICE; };
+    // CIM_HostedService TO CIM_ComputerSystem
+       Instance of CIM_HostedService as $HSServerSysProtoService {
+         Antecedent = $ServerSystem;
+         Dependent = $PROTOSERVICE; };
+    // CIM_ServiceAccessBySAP TO CIM_ServiceAccessPoint (see below)
+    // CIM_ServiceServiceDependency TO CIM_WBEMServer (see below)
+    
+    // CIM_SchemaInformationStructure instance
+    // Name,OwningOrganization,Version
+
+    // CIM_TCPProtocolEndpoint instances
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // ElementName,NameFormat,PortNumber,ProtocolIFType
+    instance of CIM_TCPProtocolEndpoint as $TCPPE11 {
+       InstanceID = "TCPPE11";
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_TCPProtocolEndpoint";
+       SystemName = "10.336.643.144";
+       Name = "10.336.643.144+TCP11";
+       ElementName = "WBEM Server TCP Protocol Endpoint";
+       NameFormat = "<PortAddress>+<Protocol><Number>";
+       OperationalStatus = {2};
+       PortNumber = 11;
+       ProtocolIFType = 4111; };
+    // SHRUB: CIM_ServiceAccessBySAP TO CIM_ProtocolService
+       instance of CIM_ServiceAccessBySAP as $SABSPSTCPPE {
+          Antecedent = $PROTOSERVICE;
+          Dependent = $TCPPE11; };
+    // CIM_HostedAccessPoint TO CIM_ComputerSystem
+      instance of CIM_HostedAccessPoint as $HAPTCPPECS11 {
+        Antecedent = $ServerSystem;
+        Dependent = $TCPPE11; };
+
+    // CIM_WBEMProtocolServiceCapabilities instance (See CIMXMLCapabilities)
+    // InstanceID
+    // AuthenticationMechanismsSupported,GenericOperationCapabilities
+    // ListeningPortManagementSupported,MaxConnections
+    // RequestedStatesSupported,WBEMProtocolVersionsSupported,ElementName
+    // SHRUB: CIM_ElementCapabilities TO CIM_ProtocolService
+
+    // CIM_WBEMServer instance
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // ElementName,EnabledState,RequestedState
+    // OperationalStatus,HealthState
+      instance of CIM_WBEMServer as $WBEMServer {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_WBEMServer";
+       SystemName = "10.336.643.144";
+       Name = "WBEM Server Instance";
+       ElementName = "The WBEM Server Service";
+       EnabledState = 5;
+       RequestedState = 12;
+       OperationalStatus = {2};
+       HealthState = 5; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_WBEMServerCapabilities (see below)
+    // CIM_HostedDependency TO CIM_WBEMServerNamespace (See below)
+    // CIM_HostedService TO CIM_ComputerSystem
+     instance of CIM_HostedService as $HSWBEMServerServerSystem {
+       Dependent = $WBEMServer;
+       Antecedent = $ServerSystem; };
+    // CIM_ServiceServiceDependency TO CIM_ProtocolService
+      instance of CIM_ServiceServiceDependency as $SSDWSPS {
+        Antecedent = $WBEMServer;
+        Dependent = $PROTOSERVICE;
+        TypeOfDependency = 3;
+        RestartService = false; };
+
+    // CIM_WBEMServerCapabilities INSTANCE
+    // InstanceID
+    // OperationsSupported,RequestedStatesSupported
+      instance of CIM_WBEMServerCapabilities as $WBEMServCap {
+        InstanceID = "WBEM Server Capabilities";
+        OperationsSupported = {2,3,4};
+        RequestedStatesSupported =  {2,3}; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_WBEMServer
+     instance of CIM_ElementCapabilities as $ECWSCS {
+        Capabilities = $WBEMServCap;
+        ManagedElement = $WBEMServer; };
+
+    // CIM_WBEMServerNamespace INSTANCES
+    // InstanceID
+    // Name,ElementName,SchemaInformation
+      instance of CIM_WBEMServerNamespace as $WBEMServName00 {
+        InstanceID = "WBEM Server Namespace 00";
+        Name = "cimv2";
+        ElementName = "cimv2";
+        SchemaInformation = "instance of CIM_SchemaInformationStructure { Name = \"CIM\"; Version = \"2.51.0\";"
+        " OwningOrganization = \"DMTF\"; Status = 3; };"; 
+         };
+    // SHRUB: CIM_HostedDependency TO CIM_WBEMServer
+      instance of CIM_HostedDependency as $HDWSWSName00 {
+        Antecedent = $WBEMServer;
+        Dependent = $WBEMServName00; };
+        
+    // CIM_IPProtocolEndpoint instances
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // NameFormat,ProtocolIFType,RequestedState,EnabledState
+    // ElementName,AddressOrigin
+    // IPv4Address,SubnetMask
+    // IPv6Address,IPv6SubnetPrefixLength
+      instance of CIM_IPProtocolEndpoint as $IPPE11 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IPProtocolEndpoint";
+       SystemName = "10.336.643.144";
+       Name = "10.336.643.144+IP11";
+       ElementName = "WBEM Server IP Protocol Endpoint";
+       NameFormat = "<PortAddress>+<Protocol><Number>";
+       RequestedState = 2;
+       EnabledState = 2;
+       AddressOrigin = 3;
+       IPv4Address = "0.0.0.0";
+       SubnetMask = "0.0.0.0";
+       ProtocolIFType = 4096; };
+    // SHRUB: CIM_HostedAccessPoint TO CIM_ComputerSystem
+      instance of CIM_HostedAccessPoint as $HAPIPPECS11 {
+        Antecedent = $ServerSystem;
+        Dependent = $IPPE11; };
+
+    // CIM_RoleBasedManagementCapabilities instance
+    // InstanceID
+    // SharedPrivilegeSupported,SupportedMethods,ElementName
+      instance of CIM_RoleBasedManagementCapabilities as $RBMCap {
+        InstanceID = "RBMCap";
+        SharedPrivilegeSupported = false; 
+        SupportedMethods = {0,1,2,3,4,5,6,7,8,9};
+        ElementName = "Role based management capabilities"; };
+    // SHRUB: CIM_ElementCapabilities to CIM_RoleBasedAuthorizationService (see below)
+ 
+    // CIM_Role instances
+    // CreationClassName,Name
+    // RoleCharacteristics,CommonName,ElementName
+      instance of CIM_Role as $Role00 {
+       CreationClassName = "CIM_Role";
+       Name = "Admin";
+       RoleCharacteristics = {2};
+       CommonName = "Administrator";
+       ElementName = "Storage Administrator"; };
+      instance of CIM_Role as $Role01 {
+       CreationClassName = "CIM_Role";
+       Name = "User";
+       RoleCharacteristics = {2};
+       CommonName = "User";
+       ElementName = "Storage User"; };
+    // SHRUB: CIM_ConcreteDependency TO CIM_Identity (See below)
+    // CIM_MemberOfCollection TO CIM_Privilege (N/A) AND CIM_Identity  (See below)
+    // CIM_OwningCollectionElement TO CIM_ComputerSystem
+      instance of CIM_OwningCollectionElement as $OCECSR00 {
+        OwningElement = $ServerSystem;
+        OwnedElement = $Role00; };
+      instance of CIM_OwningCollectionElement as $OCECSR00 {
+        OwningElement = $ServerSystem;
+        OwnedElement = $Role01; };
+    // CIM_RoleLimitedToTarget TO CIM_ManagedElement
+      instance of CIM_RoleLimitedToTarget as $RLTTServer {
+        DefiningRole = $Role00;
+        TargetElement = $ServerSystem; };
+      instance of CIM_RoleLimitedToTarget as $RLTTServer {
+        DefiningRole = $Role01;
+        TargetElement = $ServerSystem; };
+    // CIM_ServiceAffectsElement TO CIM_RoleBasedAuthorizationService (See below)
+
+    // CIM_RoleBasedAuthorizationService INSTANCE
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // ElementName
+      instance of CIM_RoleBasedAuthorizationService as $RBAService {
+       SystemCreationClassName = "CIM_System";
+       SystemName = "10.336.643.144";
+       CreationClassName = "CIM_RoleBasedAuthorizationService";
+       Name = "RBA Service";
+       ElementName = "Role Based Authorization Service"; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_RoleBasedManagementCapabilities
+      instance of CIM_ElementCapabilities as $ECRBSRBMC {
+        Capabilities = $RBMCap;
+        ManagedElement = $RBAService; };
+    // CIM_HostedService TO CIM_ComputerSystem
+      instance of CIM_HostedService as $HSCSRBAService {
+       Dependent = $RBAService;
+       Antecedent = $ServerSystem; };
+    // CIM_ServiceAffectsElement TO CIM_Role AND CIM_Privilege
+     instance of CIM_ServiceAffectsElement as $SAERBASRole00 {
+        AffectingElement = $RBAService;
+        AffectedElement = $Role00; };
+     instance of CIM_ServiceAffectsElement as $SAERBASRole01 {
+        AffectingElement = $RBAService;
+        AffectedElement = $Role01; };
+    // CIM_ServiceServiceDependency TO CIM_AccountManagementService (N/A)
+    
+    // CIM_Account INSTANCES
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // UserID,UserPassword,OrganizationName,ElementName
+    // RequestedState,EnabledState
+      instance of CIM_Account as $Account00 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_Account";
+       SystemName = "10.336.643.144";
+       Name = "10.336.643.144+00";
+       UserID = "Jane";
+       UserPassword = "0o173";
+       OrganizationName = "Storage Systems";
+       ElementName = "Jane Doe Account";
+       RequestedState = 2;
+       EnabledState = 2; };
+      instance of CIM_Account as $Account01 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_Account";
+       SystemName = "10.336.643.144";
+       Name = "10.336.643.144+01";
+       UserID = "John";
+       UserPassword = "0o710";
+       OrganizationName = "Client Lib";
+       ElementName = "John Doe Account";
+       RequestedState = 2;
+       EnabledState = 2; };
+    // SHRUB: CIM_AccountOnSystem TO CIM_ComputerSystem
+      instance of CIM_AccountOnSystem as $AoSServerA00 {
+        GroupComponent = $ServerSystem;
+        PartComponent = $Account00; };
+      instance of CIM_AccountOnSystem as $AoSServerA01 {
+        GroupComponent = $ServerSystem;
+        PartComponent = $Account01; };
+    // CIM_AssignedIdentity TO CIM_Identity (See below)
+    
+    // CIM_AccountManagementCapabilities INSTANCE
+    // InstanceID
+    // ElementNameEditSupported,ElementName,OperationsSupported
+      instance of CIM_AccountManagementCapabilities as $AccountCap {
+        InstanceID = "Account Management Capabilities";
+        ElementName = "Capabilities for Account Management Service";
+        ElementNameEditSupported = false;
+        OperationsSupported = {}; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_AccountManagementService (See Below)
+    
+    // CIM_AccountManagementService INSTANCE
+    // SystemCreationClassName,SystemName,CreationClassName,Name
+    // RequestedState,EnabledState,ElementName
+      instance of CIM_AccountManagementService as $AccountService {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_AccountManagementService";
+       SystemName = "10.336.643.144";
+       Name = "Account Management Service";
+       ElementName = "Server Account Management Service";
+       EnabledState = 5;
+       RequestedState = 12; };
+    // SHRUB: CIM_ElementCapabilities TO CIM_AccountManagementCapabilities 
+      instance of CIM_ElementCapabilities as $ECAMSAMC {
+        ManagedElement = $AccountService;
+        Capabilities = $AccountCap; };
+    // CIM_ServiceServiceDependency TO CIM_RoleBasedAuthorizationService (N/A)
+    // CIM_HostedService TO CIM_ComputerSystem
+      instance of CIM_HostedService as $HSAMSServer {
+        Antecedent = $ServerSystem;
+        Dependent = $AccountService; };
+    // CIM_ServiceAffectsElement TO CIM_Identity (See below)
+     /////////////////////////  
+    // CIM_Identity INSTANCES
+    // InstanceID
+    // ElementName
+      instance of CIM_Identity as $Ident00 {
+        InstanceID = "Ident00";
+        ElementName = "Jane Doe"; };
+      instance of CIM_Identity as $Ident01 {
+        InstanceID = "Ident01";
+        ElementName = "John Doe"; };
+    // SHRUB: CIM_ConcreteDependency TO CIM_Role
+      instance of CIM_ConcreteDependency as $CDIdentRole00 {
+        Antecedent = $Ident00;
+        Dependent = $Role00; };
+      instance of CIM_ConcreteDependency as $CDIdentRole01 {
+        Antecedent = $Ident01;
+        Dependent = $Role01; };
+    // CIM_AssignedIdentity TO CIM_Account
+      instance of CIM_AssignedIdentity as $AIAccountIdent00 {
+        IdentityInfo = $Ident00;
+        ManagedElement = $Account00; };
+      instance of CIM_AssignedIdentity as $AIAccountIdent01 {
+        IdentityInfo = $Ident01;
+        ManagedElement = $Account01; };
+    // CIM_ServiceAffectsElement TO CIM_AccountManagementService
+      instance of CIM_ServiceAffectsElement as $SAEIdentAMS00 {
+        AffectedElement = $Ident00;
+        AffectingElement = $AccountService;
+        ElementEffects = 5; };
+      instance of CIM_ServiceAffectsElement as $SAEIdentAMS01 {
+        AffectedElement = $Ident01;
+        AffectingElement = $AccountService;
+        ElementEffects = 5; };
+       
