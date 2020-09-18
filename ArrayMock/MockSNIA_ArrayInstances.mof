@@ -133,6 +133,18 @@
        RegisteredName = "Multiple Computer System"; RegisteredVersion = "1.2.0";
        AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
        Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Multiple Computer System"; };
+//    instance of CIM_RegisteredProfile as $RPSPDiag {
+//       InstanceID = "Storage Pool Diagnostics+1.8.0";
+//       RegisteredOrganization = 11; OtherRegisteredOrganization = null;
+//       RegisteredName = "Storage Pool Diagnostics"; RegisteredVersion = "1.8.0";
+//       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
+//       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Storage Pool Diagnostics"; };
+//    instance of CIM_RegisteredProfile as $RPDiagJC {
+//       InstanceID = "Diagnostic Job Control+1.0.0b";
+//       RegisteredOrganization = 2; OtherRegisteredOrganization = null;
+//       RegisteredName = "Diagnostic Job Control"; RegisteredVersion = "1.0.0b";
+//       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
+//       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Diagnostic Job Control"; };
 
     // A CIM_ComputerSystem instance
     instance of CIM_ComputerSystem as $CS0 { InstanceID = "CS0";
@@ -174,6 +186,12 @@
     instance of CIM_ElementConformsToProfile as $ECTPRPMultiCSSMIS {
        ConformantStandard = $RPSMIS;
        ManagedElement = $RPMultiCS; };
+//    instance of CIM_ElementConformsToProfile as $ECTPRPSPDiagSMIS {
+//       ConformantStandard = $RPSMIS;
+//       ManagedElement = $RPSPDiag; };
+//    instance of CIM_ElementConformsToProfile as $ECTPRPDiagJCSMIS {
+//       ConformantStandard = $RPSMIS;
+//       ManagedElement = $RPDiagJC; };
     instance of CIM_ElementConformsToProfile as $ECTPServerOM {
        ConformantStandard = $RPServer;
        ManagedElement = $ServerOM; };
@@ -194,21 +212,51 @@
     instance of CIM_ReferencedProfile as $RPArrayBS {
        Antecedent = $RPArray;
        Dependent = $RPBS; };
+//    instance of CIM_ReferencedProfile as $RPBSSPDiag {
+//       Antecedent = $RPBS;
+//       Dependent = $RPSPDiag; };
     instance of CIM_ReferencedProfile as $RPArrayFCTP {
        Antecedent = $RPArray;
        Dependent = $RPFCTP; };
+    instance of CIM_ReferencedProfile as $RPFCTPIND {
+       Antecedent = $RPFCTP;
+       Dependent = $RPIND; };
     instance of CIM_ReferencedProfile as $RPArraySOFTWARE {
        Antecedent = $RPArray;
        Dependent = $RPSOFTWARE; };
     instance of CIM_ReferencedProfile as $RPArrayDDLITE {
        Antecedent = $RPArray;
        Dependent = $RPDDLITE; };
+    instance of CIM_ReferencedProfile as $RPDDLITEIND {
+       Antecedent = $RPDDLITE;
+       Dependent = $RPIND; };
     instance of CIM_ReferencedProfile as $RPArrayBSPerf {
        Antecedent = $RPArray;
        Dependent = $RPBSPerf; };
+    instance of CIM_ReferencedProfile as $RPBSPerfMultiCS {
+       Antecedent = $RPBSPerf;
+       Dependent = $RPMultiCS; };
+    instance of CIM_ReferencedProfile as $RPBSPerfFCTP {
+       Antecedent = $RPBSPerf;
+       Dependent = $RPFCTP; };
+    instance of CIM_ReferencedProfile as $RPBSPerfDDLITE {
+       Antecedent = $RPBSPerf;
+       Dependent = $RPDDLITE; };
+    instance of CIM_ReferencedProfile as $RPBSPerfIND {
+       Antecedent = $RPBSPerf;
+       Dependent = $RPIND; };
     instance of CIM_ReferencedProfile as $RPArrayMultiCS {
        Antecedent = $RPArray;
        Dependent = $RPMultiCS; };
+//    instance of CIM_ReferencedProfile as $RPArraySPDiag {
+//       Antecedent = $RPArray;
+//       Dependent = $RPSPDiag; };
+//    instance of CIM_ReferencedProfile as $RPSPDiagIND {
+//       Antecedent = $RPSPDiag;
+//       Dependent = $RPIND; };
+//    instance of CIM_ReferencedProfile as $RPSPDiagDiagJC {
+//       Antecedent = $RPSPDiag;
+//       Dependent = $RPDiagJC; };
     instance of CIM_ReferencedProfile as $RPServerPRP {
        Antecedent = $RPServer;
        Dependent = $RPPRP; };
@@ -271,6 +319,13 @@
        instance of CIM_ElementSoftwareIdentity as $ESIRPMultiCS {
           Antecedent = $ArraySoftware;
           Dependent = $RPMultiCS; };
+
+//       instance of CIM_ElementSoftwareIdentity as $ESIRPSPDiag {
+//          Antecedent = $ArraySoftware;
+//          Dependent = $RPSPDiag; };
+//       instance of CIM_ElementSoftwareIdentity as $ESIRPDiagJC {
+//          Antecedent = $ArraySoftware;
+//          Dependent = $RPDiagJC; };
           
        instance of CIM_ElementSoftwareIdentity as $ESIRPSOFTWARE {
           Antecedent = $ArraySoftware;
@@ -312,8 +367,12 @@
     instance of CIM_FilterCollection as $INDMCSFiltColl {
        InstanceID = "10.336.643.144:MCSFilterCollection";
        CollectionName = "SNIA:Multiple Computer System:FilterCollection"; };
+    instance of CIM_FilterCollection as $INDJCFiltColl {
+       InstanceID = "10.336.643.144:JobControlFilterCollection";
+       CollectionName = "DMTF:Job Control:FilterCollection"; };
   
     // Instances of CIM_IndicationFilter
+    // NEED TO ASSESS WHAT FILTERS ARE POPULATED FOR STORAGE POOL DIAGNOSTICS
     
     instance of CIM_IndicationFilter as $INDFiltArray01 {
        SystemCreationClassName = "CIM_System";
@@ -504,6 +563,53 @@
        QueryLanguage = "DMTF:CQL";
        SourceNamespaces = "cim/v2";
        IndividualSubscriptionSupported = true; };
+
+    instance of CIM_IndicationFilter as $INDFiltJobControl01 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Creation of a job";
+       Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ConcreteJob";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl02 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Change in job State";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::JobState <> PreviousInstance.CIM_ConcreteJob::JobState";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl03 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Job Completed with an Exception/Error";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 6";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl04 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Job Completed Successfully";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 2";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+  instance of CIM_IndicationFilter as $INDFiltJobControl05 {
+       SystemCreationClassName = "CIM_System";
+       CreationClassName = "CIM_IndicationFilter";
+       SystemName = "10.336.643.144";
+       Name = "Change in PercentComplete";
+       Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::PercentComplete <> PreviousInstance.CIM_ConcreteJob::PercentComplete";
+       QueryLanguage = "DMTF:CQL";
+       SourceNamespaces = "cim/v2";
+       IndividualSubscriptionSupported = true; };
+       
        
     // A CIM_ConcreteDependency Instance
      instance of CIM_ConcreteDependency as $CDRPSFC {
@@ -554,6 +660,9 @@
      instance of CIM_OwningCollectionElement as $OCEISFCMCS {
         OwningElement  = $INDSERV;
         OwnedElement = $INDMCSFiltColl; };
+     instance of CIM_OwningCollectionElement as $OCEISFCJC {
+        OwningElement  = $INDSERV;
+        OwnedElement = $INDJCFiltColl; };
 
     // Instances of CIM_ServiceAffectsElement
      instance of CIM_ServiceAffectsElement as $SAEISIFA01 {
@@ -613,6 +722,21 @@
      instance of CIM_ServiceAffectsElement as $SAEISIFMCS01 {
         AffectingElement = $INDSERV;
         AffectedElement = $INDFiltMCS01; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC01 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl01; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC02 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl02; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC03 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl03; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC04 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl04; }; 
+     instance of CIM_ServiceAffectsElement as $SAEISIFJC05 {
+        AffectingElement = $INDSERV;
+        AffectedElement = $INDFiltJobControl05; }; 
 
 
     // Instances of CIM_MemberOfCollection
@@ -705,7 +829,7 @@
     instance of CIM_RegisteredProfile as $RPDMTFPRP {
        InstanceID = "DMTF Profile Registration+1.0"; RegisteredOrganization = 2;
        OtherRegisteredOrganization = null; 
-       RegisteredName = "DMTF Profile Registration"; RegisteredVersion = "1.0";
+       RegisteredName = "Profile Registration"; RegisteredVersion = "1.0";
        AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"}; };
     instance of CIM_RegisteredProfile as $RPIPInterface {
       InstanceID = "IP Interface 1.1.1";
@@ -758,6 +882,10 @@
     instance of CIM_ElementConformsToProfile as $ECTPSimpleIdentSMIS {
        ConformantStandard = $RPSMIS;
        ManagedElement = $RPSimpleIdent; };
+    // PRP SHRUBs: CIM_ConcreteDependency to profile filter collection
+     instance of CIM_ConcreteDependency as $CDRPJC {
+        Antecedent = $RPJobControl;
+        Dependent = $INDJCFiltColl; };
     // PRP SHRUBs: CIM_ReferencedProfile to related profiles
     instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
        Antecedent = $RPWBEMServer;
@@ -765,18 +893,36 @@
     instance of CIM_ReferencedProfile as $RPWBEMServerIPInterface {
        Antecedent = $RPWBEMServer;
        Dependent = $RPIPInterface; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPIPInterface;
+       Dependent = $RPDMTFPRP; };
     instance of CIM_ReferencedProfile as $RPWBEMServerJob {
        Antecedent = $RPWBEMServer;
        Dependent = $RPJobControl; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPJobControl;
+       Dependent = $RPDMTFPRP; };
     instance of CIM_ReferencedProfile as $RPWBEMServerRoleBased {
        Antecedent = $RPWBEMServer;
        Dependent = $RPRoleBased; };
     instance of CIM_ReferencedProfile as $RPWBEMServerSimple {
+       Antecedent = $RPRoleBased;
+       Dependent = $RPSimpleIdent; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPRoleBased;
+       Dependent = $RPDMTFPRP; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerSimple {
        Antecedent = $RPWBEMServer;
        Dependent = $RPSimpleIdent; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPSimpleIdent;
+       Dependent = $RPDMTFPRP; };
     instance of CIM_ReferencedProfile as $RPWBEMServerIND {
        Antecedent = $RPWBEMServer;
        Dependent = $RPIND; };
+    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
+       Antecedent = $RPIND;
+       Dependent = $RPDMTFPRP; };
     // PRP SHRUBs: CIM_RegisteredProfile to SoftwareIdentity
        instance of CIM_ElementSoftwareIdentity as $ESIRPWBEMServ {
           Antecedent = $ServerSoftware;
