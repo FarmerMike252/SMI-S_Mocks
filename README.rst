@@ -1,14 +1,14 @@
 SMI-S_Mocks - A set of mock WBEM servers that support SMI-S 1.8.0 storage management servers
 ============================================================================================
-This is prototype storage for SMI-S mocks. It is used for development of the mocks. It uses
+This is storage for a set of SMI-S mocks. It is used for publishing the mocks. It uses
 python, pywbem and pywbemtools.
 
 Overview
 --------
 
 Pywbem (and pywbemtools) provide a mechanism for mocking a WBEM server locally on your own
-system. The mocks use this mechanism. They are developed using Python 3.8, Pywbem 1.0.2 and
-pywbemtools 0.7.1.
+system. The mocks use this mechanism. They are developed using Python 3.8, Pywbem 1.1.1 and
+pywbemtools 0.8.0.
 
 The Mocks
 ---------
