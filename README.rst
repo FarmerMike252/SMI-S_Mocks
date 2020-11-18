@@ -17,7 +17,7 @@ Each mock has it's own directory. Each directory contains three files that make 
 
 A py file (Python program), an xml file and an instance mof file.
 
-* The xml file is named [Org]_[Profile Name]_leaflist.xml. Examples are SNIA_Array_leaflist.xml and SNIA_NAS Head_leaflist.
+* The xml file is named [Org]_[Profile Name]_leaflist.xml. Examples are SNIA_Array_leaflist.xml and SNIA_NAS Head_leaflist.xml.
   The xml leaflist file holds all the leaf classes for a complete implementation of an autonomous profile. That is, all 
   classes in the autonomous profile and its component profiles. It is based on all classes identified by SMI-S 1.8.0.
 
