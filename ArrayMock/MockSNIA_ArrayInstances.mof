@@ -1,6 +1,6 @@
    // CIM_System
-    instance of CIM_System as $ServerSystem { InstanceID = "ServerSystem";
-    CreationClassName = "CIM_System"; Name = "10.336.643.144";
+    instance of CIM_ComputerSystem as $ServerSystem { InstanceID = "ServerSystem";
+    CreationClassName = "CIM_ComputerSystem"; Name = "10.336.643.144";
    NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
    Roles = {}; EnabledState = 5; OtherEnabledState = null;
    RequestedState = 12; EnabledDefault = 2; HealthState = 5;
@@ -22,7 +22,7 @@
     SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
    ObjectManagerCreationClassName = "CIM_ObjectManager";
    ObjectManagerName = "ACME:10.336.643.144"; CreationClassName = "CIM_Namespace";
-   Name = "cimv2"; ClassType = 2; ClassTypeVersion = null; 
+   Name = "interop"; ClassType = 2; ClassTypeVersion = null; 
    DescriptionOfClassType = "CIM"; Caption = null; Description = null;
    ElementName = null; };
     // CIM_ObjectManagerCommunicationMechanism
@@ -381,7 +381,7 @@
        Name = "System Creation";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ComputerSystem";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
     
     instance of CIM_IndicationFilter as $INDFiltArray02 {
@@ -391,7 +391,7 @@
        Name = "System Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_ComputerSystem";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
        
   instance of CIM_IndicationFilter as $INDFiltArray03 {
@@ -401,7 +401,7 @@
        Name = "System Status Change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ComputerSystem AND SourceInstance.CIM_ComputerSystem::OperationalStatus <> PreviousInstance.CIM_ComputerSystem::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltArray04 {
@@ -411,7 +411,7 @@
        Name = "StorageVolume has degraded";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='DRM38'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltArray05 {
@@ -421,7 +421,7 @@
        Name = "Storage Volume has failed";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='DRM39'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltArray06 {
@@ -431,7 +431,7 @@
        Name = "Storage Volume returned to normal service";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='DRM40'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS01 {
@@ -441,7 +441,7 @@
        Name = "Pool Creation";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_StoragePool";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
        
     instance of CIM_IndicationFilter as $INDFiltBS02 {
@@ -451,7 +451,7 @@
        Name = "Pool Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_StoragePool";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS03 {
@@ -461,7 +461,7 @@
        Name = "Change in Pool TotalManagedSpace";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_StoragePool AND SourceInstance.CIM_StoragePool::TotalManagedSpace <> PreviousInstance.CIM_StoragePool::TotalManagedSpace";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS04 {
@@ -471,7 +471,7 @@
        Name = "Pool capacity is running low.";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM28'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS05 {
@@ -481,7 +481,7 @@
        Name = "Pool capacity has run out";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM29'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS06 {
@@ -491,7 +491,7 @@
        Name = "Pool capacity condition has been cleared";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM30'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltDDL01 {
@@ -501,7 +501,7 @@
        Name = "Disk Drive Creation";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_DiskDrive";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
        
     instance of CIM_IndicationFilter as $INDFiltDDL02 {
@@ -511,7 +511,7 @@
        Name = "Disk Drive Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_DiskDrive";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltDDL03 {
@@ -521,7 +521,7 @@
        Name = "Disk Drive Status change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_DiskDrive AND SourceInstance.CIM_DiskDrive::OperationalStatus <> PreviousInstance.CIM_DiskDrive::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFCP01 {
@@ -541,7 +541,7 @@
        Name = "FC Port Status change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_FCPort AND SourceInstance.CIM_FCPort::OperationalStatus <> PreviousInstance.CIM_FCPort::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFCP03 {
@@ -551,7 +551,7 @@
        Name = "FC Port Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_FCPort";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltMCS01 {
@@ -571,7 +571,7 @@
        Name = "Creation of a job";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ConcreteJob";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl02 {
        SystemCreationClassName = "CIM_System";
@@ -580,7 +580,7 @@
        Name = "Change in job State";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::JobState <> PreviousInstance.CIM_ConcreteJob::JobState";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl03 {
        SystemCreationClassName = "CIM_System";
@@ -589,7 +589,7 @@
        Name = "Job Completed with an Exception/Error";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 6";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl04 {
        SystemCreationClassName = "CIM_System";
@@ -598,7 +598,7 @@
        Name = "Job Completed Successfully";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 2";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl05 {
        SystemCreationClassName = "CIM_System";
@@ -607,7 +607,7 @@
        Name = "Change in PercentComplete";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::PercentComplete <> PreviousInstance.CIM_ConcreteJob::PercentComplete";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespaces = "interop";
        IndividualSubscriptionSupported = true; };
        
        
@@ -1079,8 +1079,8 @@
     // Name,ElementName,SchemaInformation
       instance of CIM_WBEMServerNamespace as $WBEMServName00 {
         InstanceID = "WBEM Server Namespace 00";
-        Name = "cimv2";
-        ElementName = "cimv2";
+        Name = "interop";
+        ElementName = "interop";
         SchemaInformation = "instance of CIM_SchemaInformationStructure { Name = \"CIM\"; Version = \"2.51.0\";"
         " OwningOrganization = \"DMTF\"; Status = 3; };"; 
          };
