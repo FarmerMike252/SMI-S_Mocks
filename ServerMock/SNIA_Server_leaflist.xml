@@ -5,7 +5,7 @@
   <ENTRY NAME="CIM_ManagementSAP"/>
   <ENTRY NAME="CIM_IndicationFilter"/>
   <ENTRY NAME="CIM_HostedCollection"/>
-  <ENTRY NAME="CIM_System"/>
+  <ENTRY NAME="CIM_ComputerSystem"/>
   <ENTRY NAME="CIM_ObjectManagerCommunicationMechanism"/>
   <ENTRY NAME="CIM_LaunchInContextCapabilities"/>
   <ENTRY NAME="CIM_LaunchInContextSAP"/>
