@@ -111,7 +111,7 @@ def setup(conn, server, verbose):
     conn.compile_schema_classes(
         unique_classes,
         schema.schema_pragma_file,
-        namespace=conn.default_namespace,
+        namespace='interop',
         verbose=False)
     """
     print('Finding CIM_Container class definition in the Repository:')
