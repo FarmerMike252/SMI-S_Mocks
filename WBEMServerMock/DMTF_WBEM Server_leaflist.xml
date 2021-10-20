@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <PROFILE_CLASSES Name="Profile classes">
+  <ENTRY NAME="CIM_ComputerSystem"/>
   <ENTRY NAME="CIM_RemoteServiceAccessPoint"/>
   <ENTRY NAME="CIM_IPProtocolEndpoint"/>
   <ENTRY NAME="CIM_ServiceServiceDependency"/>
