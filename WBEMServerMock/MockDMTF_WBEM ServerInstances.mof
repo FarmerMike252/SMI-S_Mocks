@@ -1,6 +1,6 @@
    // CIM_System
     instance of CIM_System as $ServerSystem { InstanceID = "ServerSystem";
-    CreationClassName = "CIM_System"; Name = "10.336.643.144";
+    CreationClassName = "CIM_ComputerSystem"; Name = "10.336.643.144";
    NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
    Roles = {}; EnabledState = 5; OtherEnabledState = null;
    RequestedState = 12; EnabledDefault = 2; HealthState = 5;
@@ -383,8 +383,8 @@
     // Name,ElementName,SchemaInformation
       instance of CIM_WBEMServerNamespace as $WBEMServName00 {
         InstanceID = "WBEM Server Namespace 00";
-        Name = "cimv2";
-        ElementName = "cimv2";
+        Name = "interop";
+        ElementName = "interop";
         SchemaInformation = "instance of CIM_SchemaInformationStructure { Name = \"CIM\"; Version = \"2.51.0\";"
         " OwningOrganization = \"DMTF\"; Status = 3; };"; 
          };
