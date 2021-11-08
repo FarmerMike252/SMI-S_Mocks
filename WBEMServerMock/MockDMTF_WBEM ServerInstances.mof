@@ -1,5 +1,5 @@
-   // CIM_System
-    instance of CIM_System as $ServerSystem { InstanceID = "ServerSystem";
+   // CIM_ComputerSystem
+    instance of CIM_ComputerSystem as $ServerSystem { InstanceID = "ServerSystem";
     CreationClassName = "CIM_ComputerSystem"; Name = "10.336.643.144";
    NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
    Roles = {}; EnabledState = 5; OtherEnabledState = null;
@@ -73,7 +73,7 @@
        Name = "Indication Service";
       CreationClassName = "CIM_IndicationService";
       SystemName = "10.336.643.144";
-      SystemCreationClassName = "CIM_System";
+      SystemCreationClassName = "CIM_ComputerSystem";
       FilterCreationEnabled = true;
       DeliveryRetryAttempts = 3;
       DeliveryRetryInterval = 30;
@@ -90,49 +90,54 @@
   
     // Instances of CIM_IndicationFilter
     instance of CIM_IndicationFilter as $INDFiltJobControl01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Creation of a job";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ConcreteJob";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Change in job State";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::JobState <> PreviousInstance.CIM_ConcreteJob::JobState";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Job Completed with an Exception/Error";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 6";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl04 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Job Completed Successfully";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 2";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl05 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Change in PercentComplete";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::PercentComplete <> PreviousInstance.CIM_ConcreteJob::PercentComplete";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "cim/v2";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
        
     // A CIM_ConcreteDependency Instance
@@ -285,7 +290,7 @@
     // ElementName,EnabledState,MaxConnections,Protocol,RequestedState
     // OperationalStatus,HealthState
     instance of CIM_ProtocolService as $PROTOSERVICE {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_ProtocolService";
        SystemName = "10.336.643.144";
        Name = "CIMXML Protocol Service";
@@ -314,7 +319,7 @@
     // ElementName,NameFormat,PortNumber,ProtocolIFType
     instance of CIM_TCPProtocolEndpoint as $TCPPE11 {
        InstanceID = "TCPPE11";
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_TCPProtocolEndpoint";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+TCP11";
@@ -344,7 +349,7 @@
     // ElementName,EnabledState,RequestedState
     // OperationalStatus,HealthState
       instance of CIM_WBEMServer as $WBEMServer {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_WBEMServer";
        SystemName = "10.336.643.144";
        Name = "WBEM Server Instance";
@@ -400,7 +405,7 @@
     // IPv4Address,SubnetMask
     // IPv6Address,IPv6SubnetPrefixLength
       instance of CIM_IPProtocolEndpoint as $IPPE11 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IPProtocolEndpoint";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+IP11";
@@ -464,7 +469,7 @@
     // SystemCreationClassName,SystemName,CreationClassName,Name
     // ElementName
       instance of CIM_RoleBasedAuthorizationService as $RBAService {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        SystemName = "10.336.643.144";
        CreationClassName = "CIM_RoleBasedAuthorizationService";
        Name = "RBA Service";
@@ -491,7 +496,7 @@
     // UserID,UserPassword,OrganizationName,ElementName
     // RequestedState,EnabledState
       instance of CIM_Account as $Account00 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_Account";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+00";
@@ -502,7 +507,7 @@
        RequestedState = 2;
        EnabledState = 2; };
       instance of CIM_Account as $Account01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_Account";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+01";
@@ -535,7 +540,7 @@
     // SystemCreationClassName,SystemName,CreationClassName,Name
     // RequestedState,EnabledState,ElementName
       instance of CIM_AccountManagementService as $AccountService {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_AccountManagementService";
        SystemName = "10.336.643.144";
        Name = "Account Management Service";
