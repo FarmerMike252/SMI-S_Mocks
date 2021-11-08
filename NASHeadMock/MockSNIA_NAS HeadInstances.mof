@@ -1,4 +1,4 @@
-  // CIM_System
+  // CIM_ComputerSystem
     instance of CIM_ComputerSystem as $ServerSystem { InstanceID = "ServerSystem";
     CreationClassName = "CIM_ComputerSystem"; Name = "10.336.643.144";
    NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
@@ -11,7 +11,7 @@
     instance of CIM_ObjectManager as $ServerOM { InstanceID = "ServerOM";
    Name = "ACME:10.336.643.144"; ElementName = "ACME CIM Server";
    Description = "ACME CIM Server Version 1.5.2";
-   SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    CreationClassName = "CIM_ObjectManager"; PrimaryOwnerName = null;
    PrimaryOwnerContact = null; StartMode = "Automatic";
    Started = true; EnabledState = 5; OtherEnabledState = null;
@@ -19,7 +19,7 @@
    StatusDescriptions = {}; Caption = null; };
     // CIM_Namespace
     instance of CIM_Namespace as $ServerNS { InstanceID = "ServerNS";
-    SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+    SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    ObjectManagerCreationClassName = "CIM_ObjectManager";
    ObjectManagerName = "ACME:10.336.643.144"; CreationClassName = "CIM_Namespace";
    Name = "interop"; ClassType = 2; ClassTypeVersion = null; 
@@ -33,7 +33,7 @@
    MultipleOperationsSupported = false; AuthenticationMechanismsSupported = {3};
    AuthenticationMechanismDescriptions = {"Basic"}; Version = "1.0";
    AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {}; 
-   SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    CreationClassName = "CIM_ObjectManagerCommunicationMechanism";
    Name = "slp:https://0.0.0.0:5989"; EnabledState = 5;
    OtherEnabledState = null; RequestedState = 12; EnabledDefault = 2;
@@ -327,7 +327,7 @@
        Name = "Indication Service";
       CreationClassName = "CIM_IndicationService";
       SystemName = "10.336.643.144";
-      SystemCreationClassName = "CIM_System";
+      SystemCreationClassName = "CIM_ComputerSystem";
       FilterCreationEnabled = true;
       DeliveryRetryAttempts = 3;
       DeliveryRetryInterval = 30;
@@ -366,293 +366,322 @@
     // Instances of CIM_IndicationFilter
     
     instance of CIM_IndicationFilter as $INDFiltNASHead01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Logical Disk Status Change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_LogicalDisk AND"
        "SourceInstance.CIM_LogicalDisk::OperationalStatus <> PreviousInstance.CIM_LogicalDisk::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
     
     instance of CIM_IndicationFilter as $INDFiltNASHead02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "A LogicalDisk has degraded";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = ‘SNIA’ AND MessageID=’DRM38’";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
        
   instance of CIM_IndicationFilter as $INDFiltNASHead03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "A LogicalDisk has failed";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = ‘SNIA’ AND MessageID=’DRM39’";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltNASHead04 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "A LogicalDisk has returned to normal service";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = ‘SNIA’ AND MessageID=’DRM40’";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Pool Creation";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_StoragePool";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
        
     instance of CIM_IndicationFilter as $INDFiltBS02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Pool Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_StoragePool";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Change in Pool TotalManagedSpace";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_StoragePool AND SourceInstance.CIM_StoragePool::TotalManagedSpace <> PreviousInstance.CIM_StoragePool::TotalManagedSpace";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS04 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Pool capacity is running low.";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM28'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS05 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Pool capacity has run out";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM29'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltBS06 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Pool capacity condition has been cleared";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM30'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
     
     instance of CIM_IndicationFilter as $INDFiltFS01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem Creation";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_LocalFileSystem";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
        
     instance of CIM_IndicationFilter as $INDFiltFS02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem Deletion";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_LocalFileSystem";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem Status Change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_LocalFileSystem AND "
        "SourceInstance.CIM_LocalFileSystem::OperationalStatus <> PreviousInstance.CIM_LocalFileSystem::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS04 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem capacity is at warning threshold";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM28'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS05 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem capacity is critical.";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM29'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS06 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filsystem capacity issues resolved";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity='SNIA' and MessageID='DRM30'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS07 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem is inaccessible";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='FSM14''";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFS08 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Filesystem has returned to normal access";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='FSM15'";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFileExport01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Creation of a FileShare element";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_FileShare";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFileExport02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Deletion of a FileShare element";
        Query = "SELECT * FROM CIM_InstDeletion WHERE SourceInstance ISA CIM_FileShare";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltFileExport03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "FileShare issues have been cleared";
        Query = "SELECT * FROM CIM_AlertIndication WHERE OwningEntity = 'SNIA' AND MessageID='FSM17’";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltNASNP01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "NAS Network Port Status Change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_NetworkPort AND "
        "SourceInstance.CIM_NetworkPort::OperationalStatus <> PreviousInstance.CIM_NetworkPort::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltNASNP02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "NAS ProtocolEndpoinnt Status change";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ProtocolEndpoint AND "
        "SourceInstance.CIM_ProtocolEndpoint::OperationalStatus <> PreviousInstance.CIM_ProtocolEndpoint::OperationalStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltMCS01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Status of System Redundancy has changed";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_RedundancySet AND SourceInstance.CIM_RedundancySet::RedundancyStatus <> PreviousInstance.CIM_RedundancySet::RedundancyStatus";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
 
     instance of CIM_IndicationFilter as $INDFiltJobControl01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Creation of a job";
        Query = "SELECT * FROM CIM_InstCreation WHERE SourceInstance ISA CIM_ConcreteJob";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl02 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Change in job State";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::JobState <> PreviousInstance.CIM_ConcreteJob::JobState";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl03 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Job Completed with an Exception/Error";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 6";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl04 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Job Completed Successfully";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 17 AND ANY SourceInstance.CIM_ConcreteJob::OperationalStatus[*] = 2";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
   instance of CIM_IndicationFilter as $INDFiltJobControl05 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IndicationFilter";
        SystemName = "10.336.643.144";
        Name = "Change in PercentComplete";
        Query = "SELECT * FROM CIM_InstModification WHERE SourceInstance ISA CIM_ConcreteJob AND SourceInstance.CIM_ConcreteJob::PercentComplete <> PreviousInstance.CIM_ConcreteJob::PercentComplete";
        QueryLanguage = "DMTF:CQL";
-       SourceNamespaces = "interop";
+       SourceNamespace = "interop";
+       SourceNamespaces = {"interop"};
        IndividualSubscriptionSupported = true; };
        
 
@@ -1089,7 +1118,7 @@
     // ElementName,EnabledState,MaxConnections,Protocol,RequestedState
     // OperationalStatus,HealthState
     instance of CIM_ProtocolService as $PROTOSERVICE {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_ProtocolService";
        SystemName = "10.336.643.144";
        Name = "CIMXML Protocol Service";
@@ -1118,7 +1147,7 @@
     // ElementName,NameFormat,PortNumber,ProtocolIFType
     instance of CIM_TCPProtocolEndpoint as $TCPPE11 {
        InstanceID = "TCPPE11";
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_TCPProtocolEndpoint";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+TCP11";
@@ -1148,7 +1177,7 @@
     // ElementName,EnabledState,RequestedState
     // OperationalStatus,HealthState
       instance of CIM_WBEMServer as $WBEMServer {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_WBEMServer";
        SystemName = "10.336.643.144";
        Name = "WBEM Server Instance";
@@ -1204,7 +1233,7 @@
     // IPv4Address,SubnetMask
     // IPv6Address,IPv6SubnetPrefixLength
       instance of CIM_IPProtocolEndpoint as $IPPE11 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_IPProtocolEndpoint";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+IP11";
@@ -1274,7 +1303,7 @@
     // SystemCreationClassName,SystemName,CreationClassName,Name
     // ElementName
       instance of CIM_RoleBasedAuthorizationService as $RBAService {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        SystemName = "10.336.643.144";
        CreationClassName = "CIM_RoleBasedAuthorizationService";
        Name = "RBA Service";
@@ -1301,7 +1330,7 @@
     // UserID,UserPassword,OrganizationName,ElementName
     // RequestedState,EnabledState
       instance of CIM_Account as $Account00 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_Account";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+00";
@@ -1312,7 +1341,7 @@
        RequestedState = 2;
        EnabledState = 2; };
       instance of CIM_Account as $Account01 {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_Account";
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+01";
@@ -1345,7 +1374,7 @@
     // SystemCreationClassName,SystemName,CreationClassName,Name
     // RequestedState,EnabledState,ElementName
       instance of CIM_AccountManagementService as $AccountService {
-       SystemCreationClassName = "CIM_System";
+       SystemCreationClassName = "CIM_ComputerSystem";
        CreationClassName = "CIM_AccountManagementService";
        SystemName = "10.336.643.144";
        Name = "Account Management Service";
