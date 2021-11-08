@@ -1,4 +1,4 @@
-   // CIM_System
+   // CIM_ComputerSystem
     instance of CIM_ComputerSystem as $ServerSystem { InstanceID = "ServerSystem";
     CreationClassName = "CIM_ComputerSystem"; Name = "10.336.643.144";
    NameFormat = "IP"; PrimaryOwnerName = null; PrimaryOwnerContact = null;
@@ -11,7 +11,7 @@
     instance of CIM_ObjectManager as $ServerOM { InstanceID = "ServerOM";
    Name = "ACME:10.336.643.144"; ElementName = "ACME CIM Server";
    Description = "ACME CIM Server Version 1.5.2";
-   SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    CreationClassName = "CIM_ObjectManager"; PrimaryOwnerName = null;
    PrimaryOwnerContact = null; StartMode = "Automatic";
    Started = true; EnabledState = 5; OtherEnabledState = null;
@@ -19,7 +19,7 @@
    StatusDescriptions = {}; Caption = null; };
     // CIM_Namespace
     instance of CIM_Namespace as $ServerNS { InstanceID = "ServerNS";
-    SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+    SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    ObjectManagerCreationClassName = "CIM_ObjectManager";
    ObjectManagerName = "ACME:10.336.643.144"; CreationClassName = "CIM_Namespace";
    Name = "interop"; ClassType = 2; ClassTypeVersion = null; 
@@ -33,7 +33,7 @@
    MultipleOperationsSupported = false; AuthenticationMechanismsSupported = {3};
    AuthenticationMechanismDescriptions = {"Basic"}; Version = "1.0";
    AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {}; 
-   SystemCreationClassName = "CIM_System"; SystemName = "10.336.643.144";
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
    CreationClassName = "CIM_ObjectManagerCommunicationMechanism";
    Name = "slp:https://0.0.0.0:5989"; EnabledState = 5;
    OtherEnabledState = null; RequestedState = 12; EnabledDefault = 2;
@@ -154,7 +154,7 @@
        Name = "Indication Service";
       CreationClassName = "CIM_IndicationService";
       SystemName = "10.336.643.144";
-      SystemCreationClassName = "CIM_System";
+      SystemCreationClassName = "CIM_ComputerSystem";
       FilterCreationEnabled = true;
       DeliveryRetryAttempts = 3;
       DeliveryRetryInterval = 30;
