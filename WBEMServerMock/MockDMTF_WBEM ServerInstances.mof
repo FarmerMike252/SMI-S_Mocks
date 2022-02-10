@@ -7,9 +7,88 @@
    OperationalStatus = {2}; StatusDescriptions = {}; 
    Caption = "Computer System"; Description = "WBEM-enabled computer system";
    ElementName = "Computer System"; };
-
+    // CIM_ObjectManager
+    instance of CIM_ObjectManager as $ServerOM { InstanceID = "ServerOM";
+   Name = "ACME:10.336.643.144"; ElementName = "ACME CIM Server";
+   Description = "ACME CIM Server Version 1.5.2";
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
+   CreationClassName = "CIM_ObjectManager"; PrimaryOwnerName = null;
+   PrimaryOwnerContact = null; StartMode = "Automatic";
+   Started = true; EnabledState = 5; OtherEnabledState = null;
+   RequestedState = 12; EnabledDefault = 2; OperationalStatus = {2};
+   StatusDescriptions = {}; Caption = null; };
+    // CIM_Namespace
+    instance of CIM_Namespace as $ServerNS { InstanceID = "ServerNS";
+    SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
+   ObjectManagerCreationClassName = "CIM_ObjectManager";
+   ObjectManagerName = "ACME:10.336.643.144"; CreationClassName = "CIM_Namespace";
+   Name = "interop"; ClassType = 2; ClassTypeVersion = null; 
+   DescriptionOfClassType = "CIM"; Caption = null; Description = null;
+   ElementName = null; };
+    // CIM_ObjectManagerCommunicationMechanism
+    instance of CIM_ObjectManagerCommunicationMechanism as $ServerOMComm { InstanceID = "ServerOMComm";
+    CommunicationMechanism = 2; OtherCommunicationMechanismDescription = "CIM-XML";
+   FunctionalProfilesSupported = {0};
+   FunctionalProfileDescriptions = {"Unknown"};
+   MultipleOperationsSupported = false; AuthenticationMechanismsSupported = {3};
+   AuthenticationMechanismDescriptions = {"Basic"}; Version = "1.0";
+   AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {}; 
+   SystemCreationClassName = "CIM_ComputerSystem"; SystemName = "10.336.643.144";
+   CreationClassName = "CIM_ObjectManagerCommunicationMechanism";
+   Name = "slp:https://0.0.0.0:5989"; EnabledState = 5;
+   OtherEnabledState = null; RequestedState = 12; EnabledDefault = 2;
+   OperationalStatus = {2}; StatusDescriptions = {"OK"}; Caption = null;
+   Description = null; ElementName = "cim-xml Adapter"; };
+    // CIM_CommMechanismForManager
+    instance of CIM_CommMechanismForManager {
+       Dependent = $ServerOMComm;
+       Antecedent = $ServerOM; };
+    // CIM_HostedAccessPoint
+    instance of CIM_HostedAccessPoint as $HAPSS00 {
+       Dependent = $ServerOMComm;
+       Antecedent = $ServerSystem; };
+    // CIM_HostedService
+    instance of CIM_HostedService as $HSOMServer {
+       Dependent = $ServerOM;
+       Antecedent = $ServerSystem; };
+    // CIM_NamespaceInManager
+    instance of CIM_NamespaceInManager as $NIMNSServer {
+       Dependent = $ServerNS;
+       Antecedent = $ServerOM; };
     // CIM_Registered Profile instances
+    instance of CIM_RegisteredProfile as $RPSMIS {
+       InstanceID = "SMI-S+1.8.0"; RegisteredOrganization = 11;
+       OtherRegisteredOrganization = null; 
+       RegisteredName = "SMI-S"; RegisteredVersion = "1.8.0";
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S"; };
+
+    instance of CIM_RegisteredProfile as $RPServer {
+       InstanceID = "Server+1.7.0"; RegisteredOrganization = 11;
+       OtherRegisteredOrganization = null;
+       RegisteredName = "Server"; RegisteredVersion = "1.7.0";
+       AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {"SLP"};
+       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Server"; };
+    instance of CIM_RegisteredProfile as $RPWBEMServer {
+      InstanceID = "WBEM Server 1.0.1i";
+      RegisteredName = "WBEM Server";
+      RegisteredOrganization = 2;
+      RegisteredVersion = "1.0.1i";
+      AdvertiseTypes = {3};
+      AdvertiseTypeDescriptions = {"SLP"};
+      ImplementedFeatures = {""}; }; 
        
+    instance of CIM_RegisteredProfile as $RPPRP {
+       InstanceID = "Profile Registration+1.7.0"; RegisteredOrganization = 11;
+       OtherRegisteredOrganization = null; 
+       RegisteredName = "Profile Registration"; RegisteredVersion = "1.7.0";
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Profile Registration"; };
+    instance of CIM_RegisteredProfile as $RPDMTFPRP {
+       InstanceID = "DMTF Profile Registration+1.0"; RegisteredOrganization = 2;
+       OtherRegisteredOrganization = null; 
+       RegisteredName = "DMTF Profile Registration"; RegisteredVersion = "1.0";
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"}; };
     instance of CIM_RegisteredProfile as $RPIND {
        InstanceID = "Indications+1.2.2"; RegisteredOrganization = 2;
        OtherRegisteredOrganization = null; 
@@ -20,19 +99,7 @@
     // InstanceID
     // RegisteredName,RegisteredOrganization,RegisteredVersion
     // AdvertiseTypes,ImplementedFeatures
-    instance of CIM_RegisteredProfile as $RPWBEMServer {
-      InstanceID = "WBEM Server 1.0.1i";
-      RegisteredName = "WBEM Server";
-      RegisteredOrganization = 2;
-      RegisteredVersion = "1.0.1i";
-      AdvertiseTypes = {3};
-      AdvertiseTypeDescriptions = {"SLP"};
-      ImplementedFeatures = {""}; }; 
-    instance of CIM_RegisteredProfile as $RPDMTFPRP {
-       InstanceID = "DMTF Profile Registration+1.0"; RegisteredOrganization = 2;
-       OtherRegisteredOrganization = null; 
-       RegisteredName = "DMTF Profile Registration"; RegisteredVersion = "1.0";
-       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"}; };
+
     instance of CIM_RegisteredProfile as $RPIPInterface {
       InstanceID = "IP Interface 1.1.1";
       RegisteredName = "IP Interface";
@@ -61,10 +128,76 @@
       RegisteredVersion = "1.1.0";
       AdvertiseTypes = {};
       AdvertiseTypeDescriptions = {}; }; 
-        
-      
     
+    // CIM_ElementConformsToProfile instances (for conformance to SMI-S)    
+    instance of CIM_ElementConformsToProfile as $ECTPServerOM {
+       ConformantStandard = $RPServer;
+       ManagedElement = $ServerOM; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPServerSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPServer; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPPRPSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPPRP; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPDMTFPRPSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPDMTFPRP; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPINDSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPIND; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPWBEMServerSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPWBEMServer; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPIPInterfaceSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPIPInterface; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPJobControlSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPJobControl; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPRoleBasedSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPRoleBased; };
+    instance of CIM_ElementConformsToProfile as $ECTPRPSimpleIdentSMIS {
+       ConformantStandard = $RPSMIS;
+       ManagedElement = $RPSimpleIdent; };
+    
+    instance of CIM_SoftwareIdentity as $ServerSoftware  {
+       InstanceID = "ManagementServerSoftwareIdentity";
+       MajorVersion = 4; MinorVersion = 6; RevisionNumber = 1; BuildNumber = 2;
+       IsLargeBuildNumber = false;
+      VersionString = "V4.6.1.2";
+      Manufacturer = "SW Inc";
+      Classifications = {5};
+      IsEntity = false;
+      Name = "SW Inc Management Server Software";
+      ElementName = "SW Inc SMI-S Server Provider V4.6.1.2"; };
+
     // CIM_ElementSoftwareIdentity instances
+       instance of CIM_ElementSoftwareIdentity as $ESIRPServer {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPServer; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPDMTFPRP {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPDMTFPRP; };    
+       instance of CIM_ElementSoftwareIdentity as $ESIRPIND {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPIND; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPWBEMServer {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPWBEMServer; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPIPInterface {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPIPInterface; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPJobControl {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPJobControl; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPRoleBased {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPRoleBased; };
+       instance of CIM_ElementSoftwareIdentity as $ESIRPSimpleIdent {
+          Antecedent = $ServerSoftware;
+          Dependent = $RPSimpleIdent; };
+       
 
           
     // INDICATIONS CLASSES
@@ -213,6 +346,15 @@
 
     // SHRUB: CIM_ElementConformsToProfile TO CIM_ComputerSystem
     // PRP SHRUBs: CIM_ReferencedProfile to related profiles
+    instance of CIM_ReferencedProfile as $RPServerPRP {
+       Antecedent = $RPServer;
+       Dependent = $RPPRP; };
+    instance of CIM_ReferencedProfile as $RPServerIND {
+       Antecedent = $RPServer;
+       Dependent = $RPIND; };
+    instance of CIM_ReferencedProfile as $RPINDDMTFPRP {
+       Antecedent = $RPIND;
+       Dependent = $RPDMTFPRP; };
     instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
        Antecedent = $RPWBEMServer;
        Dependent = $RPDMTFPRP; };
@@ -246,12 +388,7 @@
     instance of CIM_ReferencedProfile as $RPWBEMServerIND {
        Antecedent = $RPWBEMServer;
        Dependent = $RPIND; };
-    instance of CIM_ReferencedProfile as $RPWBEMServerDMTFPRP {
-       Antecedent = $RPIND;
-       Dependent = $RPDMTFPRP; };
-    // PRP SHRUBs: CIM_RegisteredProfile to SoftwareIdentity
 
-    
     // CIM_CIMXMLCapabilities instances
     // InstanceID
     // AuthenticationMechanismsSupported,ElementName,GenericOperationCapabilities
@@ -501,8 +638,8 @@
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+00";
        UserID = "Jane";
-       UserPassword = "0o173";
-       OrganizationName = "Storage Systems";
+       UserPassword = {"0o173"};
+       OrganizationName = {"Storage Systems"};
        ElementName = "Jane Doe Account";
        RequestedState = 2;
        EnabledState = 2; };
@@ -512,8 +649,8 @@
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+01";
        UserID = "John";
-       UserPassword = "0o710";
-       OrganizationName = "Client Lib";
+       UserPassword = {"0o710"};
+       OrganizationName = {"Client Lib"};
        ElementName = "John Doe Account";
        RequestedState = 2;
        EnabledState = 2; };
@@ -585,9 +722,9 @@
       instance of CIM_ServiceAffectsElement as $SAEIdentAMS00 {
         AffectedElement = $Ident00;
         AffectingElement = $AccountService;
-        ElementEffects = 5; };
+        ElementEffects = {5}; };
       instance of CIM_ServiceAffectsElement as $SAEIdentAMS01 {
         AffectedElement = $Ident01;
         AffectingElement = $AccountService;
-        ElementEffects = 5; };
-       
+        ElementEffects = {5}; };
+
