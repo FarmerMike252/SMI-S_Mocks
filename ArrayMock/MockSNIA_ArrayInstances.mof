@@ -1222,8 +1222,8 @@
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+00";
        UserID = "Jane";
-       UserPassword = "0o173";
-       OrganizationName = "Storage Systems";
+       UserPassword = {"0o173"};
+       OrganizationName = {"Storage Systems"};
        ElementName = "Jane Doe Account";
        RequestedState = 2;
        EnabledState = 2; };
@@ -1233,8 +1233,8 @@
        SystemName = "10.336.643.144";
        Name = "10.336.643.144+01";
        UserID = "John";
-       UserPassword = "0o710";
-       OrganizationName = "Client Lib";
+       UserPassword = {"0o710"};
+       OrganizationName = {"Client Lib"};
        ElementName = "John Doe Account";
        RequestedState = 2;
        EnabledState = 2; };
@@ -1306,11 +1306,11 @@
       instance of CIM_ServiceAffectsElement as $SAEIdentAMS00 {
         AffectedElement = $Ident00;
         AffectingElement = $AccountService;
-        ElementEffects = 5; };
+        ElementEffects = {5}; };
       instance of CIM_ServiceAffectsElement as $SAEIdentAMS01 {
         AffectedElement = $Ident01;
         AffectingElement = $AccountService;
-        ElementEffects = 5; };
+        ElementEffects = {5}; };
        
     // Array classes
     // A CIM_SCSIArbitraryLogicalUnit Instance
