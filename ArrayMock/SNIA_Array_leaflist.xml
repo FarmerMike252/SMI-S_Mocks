@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PROFILE_CLASSES Name="Profile classes">
   <ENTRY NAME="CIM_SystemPackaging"/>
   <ENTRY NAME="CIM_InstIndication"/>
@@ -199,7 +199,7 @@
   <ENTRY NAME="CIM_SystemComponent"/>
   <ENTRY NAME="CIM_LaunchInContextService"/>
   <ENTRY NAME="CIM_Card"/>
-  <ENTRY NAME="CIM_ListenerDestination"/>
+  <ENTRY NAME="CIM_ListenerDestinationCIMXML"/>
   <ENTRY NAME="CIM_LogicalDevice"/>
   <ENTRY NAME="CIM_AssociatedPrivilege"/>
   <ENTRY NAME="CIM_TargetPortGroup"/>
