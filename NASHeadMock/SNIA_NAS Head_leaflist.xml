@@ -14,7 +14,7 @@
   <ENTRY NAME="CIM_ManagementSAP"/>
   <ENTRY NAME="CIM_CIMXMLCapabilities"/>
   <ENTRY NAME="CIM_LaunchInContextService"/>
-  <ENTRY NAME="CIM_ListenerDestination"/>
+  <ENTRY NAME="CIM_ListenerDestinationCIMXML"/>
   <ENTRY NAME="CIM_FSDomainIdentity"/>
   <ENTRY NAME="CIM_ReplicationService"/>
   <ENTRY NAME="CIM_FCPort"/>
