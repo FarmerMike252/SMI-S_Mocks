@@ -94,19 +94,19 @@
        InstanceID = "Filesystem+1.7.0"; RegisteredOrganization = 11;
        OtherRegisteredOrganization = null;
        RegisteredName = "Filesystem"; RegisteredVersion = "1.7.0";
-       AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
        Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S Filesystem"; };
     instance of CIM_RegisteredProfile as $RPFileStorage {
        InstanceID = "File Storage+1.4.0"; RegisteredOrganization = 11;
        OtherRegisteredOrganization = null;
        RegisteredName = "File Storage"; RegisteredVersion = "1.4.0";
-       AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
        Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S File Storage"; };
     instance of CIM_RegisteredProfile as $RPFileExport {
        InstanceID = "File Export+1.7.0"; RegisteredOrganization = 11;
        OtherRegisteredOrganization = null;
        RegisteredName = "File Export"; RegisteredVersion = "1.7.0";
-       AdvertiseTypes = {3}; AdvertiseTypeDescriptions = {"Not Advertised"};
+       AdvertiseTypes = {2}; AdvertiseTypeDescriptions = {"Not Advertised"};
        Caption = "SMI-S"; Description = "SMI-S"; ElementName = "SMI-S File Export"; };
        
     instance of CIM_RegisteredProfile as $RPPP {
